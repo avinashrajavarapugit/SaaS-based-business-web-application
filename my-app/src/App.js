@@ -5,7 +5,6 @@ import Home from './Home';
 import './App.css';
 import Pricing from './Pricing';
 import Login from './Login';
-import { loadStripe } from "@stripe/stripe-js";
 import Header from './Header';
 import Footer from './Footer';
 import Signup from './Signup';
@@ -21,9 +20,6 @@ import TermsOfService from './TermsOfService';
 import NewsFeed from './Newsfeed';
 import Features from './Features';
 import RequestDemo from './RequestDemo';
-const promise = loadStripe(
-  "xxxxxxx"
-);
 function App() {
   const router = createBrowserRouter([
     {
