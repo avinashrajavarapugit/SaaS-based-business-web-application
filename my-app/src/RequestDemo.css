@@ -1,0 +1,61 @@
+.request-demo {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 50px;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+    text-align: center;
+  }
+  
+  .request-demo h2 {
+    margin-bottom: 30px;
+  }
+  
+  .request-demo form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .request-demo .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    text-align: left;
+  }
+  
+  .request-demo label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .request-demo input,
+  .request-demo textarea {
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .request-demo input:focus,
+  .request-demo textarea:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  .request-demo button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #0070f3;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .request-demo button:hover {
+    background-color: #0062cc;
+  }
+  

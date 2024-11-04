@@ -1,0 +1,83 @@
+.av{
+    padding-top: 20px;
+}
+.features {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding-top: 20px;
+  }
+  
+  .head {
+    background-color: dodgerblue;
+    font-size:20px;
+    color:white;
+    font-weight:bold;
+    display: flex;
+    flex-direction: row;
+    justify-content:center;
+    padding-bottom: 50px;
+    padding-top: 40px;
+  }
+  
+  .image1, .image2, .image3, .image4, .image5, .image6 {
+    width: calc(100% / 3 - 10px);
+    height: 150px;
+    background-color: #f2f2f2;
+    border-radius: 10px;
+    text-align: center;
+    line-height: 150px;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .middle1, .middle2, .middle3, .middle4, .middle5, .middle6 {
+    width: calc(100% / 3 - 10px);
+    height: 0px;
+    overflow: hidden;
+    display: flex;
+    position: fixed;
+    top: 1px;
+    flex-direction: row;
+    top: 150px;
+    left: 0;
+    background-color: #fff;
+    border-radius: 0px 0px 10px 10px;
+    transition: height 0.5s ease;
+  }
+  
+  .image1:hover + .middle1, .image2:hover + .middle2, .image3:hover + .middle3, .image4:hover + .middle4, .image5:hover + .middle5, .image6:hover + .middle6 {
+    height: 150px;
+    
+  }
+  
+  .text1, .text2, .text3, .text4, .text5, .text6 {
+    padding: 10px;
+    font-size: 16px;
+    
+  }
+  
+  @media (max-width: 992px) {
+    .image1, .image2, .image3, .image4, .image5, .image6 {
+      width: calc(100% / 2 - 10px);
+    }
+  
+    .middle1, .middle2, .middle3, .middle4, .middle5, .middle6 {
+      width: calc(100% / 2 - 10px);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .image1, .image2, .image3, .image4, .image5, .image6 {
+      width: 100%;
+    }
+  
+    .middle1, .middle2, .middle3, .middle4, .middle5, .middle6 {
+      width: 100%;
+    }
+  }
+  

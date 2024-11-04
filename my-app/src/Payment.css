@@ -1,0 +1,90 @@
+body {
+    background-color: #f7f7f7;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  .payment-page {
+    background-color: #fff;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    max-width: 500px;
+    padding: 20px;
+  }
+  
+  .payment-page h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .payment-page label {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  
+  .payment-page input[type="text"],
+  .payment-page input[type="email"],
+  .payment-page input[type="tel"] {
+    border: 1px solid #dcdcdc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+    margin-bottom: 20px;
+    padding: 10px;
+    width: 100%;
+  }
+  
+  .payment-page input[type="text"]:focus,
+  .payment-page input[type="email"]:focus,
+  .payment-page input[type="tel"]:focus {
+    outline: none;
+    border-color: #007bff;
+  }
+  
+  .payment-page button[type="submit"] {
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 10px;
+    width: 100%;
+  }
+  
+  .payment-page button[type="submit"]:hover {
+    background-color: #0069d9;
+  }
+  
+  .payment-page .card-element {
+    border: 1px solid #dcdcdc;
+    border-radius: 4px;
+    padding: 10px;
+  }
+  
+  .payment-page .card-element .StripeElement {
+    height: 40px;
+    width: 100%;
+  }
+  
+  .payment-page .card-error {
+    color: #dc3545;
+    font-size: 14px;
+    margin-top: 10px;
+  }
+  
+  .payment-page .processing-spinner {
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    border-left-color: #007bff;
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+    animation: spin 1s linear infinite;
+    margin-right: 10px;
+  }
+  
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  

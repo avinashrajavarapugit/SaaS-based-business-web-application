@@ -1,0 +1,111 @@
+
+.news{
+    border: #232323;
+    border-radius: 10px;
+    padding-bottom: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.headnews{
+    background-color: dodgerblue;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-bottom: 15px;
+}
+.newsfeed-container {
+    display: flex;
+    padding-top: 20px;
+    flex-direction: column;
+    margin-left: 100px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    max-width: 900px;
+    overflow: hidden;
+    padding-bottom: 50px;
+  }
+
+  .newsfeed-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #232323;
+    color: #fff;
+    padding: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .newsfeed-header:hover {
+    background-color: #333;
+  }
+  
+  .newsfeed-header h2 {
+    font-size: 24px;
+    margin: 0;
+  }
+  
+  .newsfeed-body {
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+  }
+  
+  .news-item {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .news-item:hover {
+    box-shadow: 0 0 8px #ddd;
+  }
+  
+  .news-item-image {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    margin-right: 16px;
+    border-radius: 8px;
+  }
+  
+  .news-item-text {
+    flex: 1;
+  }
+  
+  .news-item-title {
+    font-size: 20px;
+    margin: 0;
+    margin-bottom: 8px;
+  }
+  
+  .news-item-description {
+    font-size: 16px;
+    margin: 0;
+  }
+  
+  .show-more-button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 16px;
+  }
+  
+  .show-more-button {
+    background-color: #232323;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .show-more-button:hover {
+    background-color: #333;
+  }
+  

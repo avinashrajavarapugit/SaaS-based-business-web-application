@@ -1,0 +1,78 @@
+.s1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.s1 label {
+  font-size: 1.2em;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.s1 input[type="text"],
+.s1 input[type="email"],
+.s1 input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0 20px;
+  border-radius: 5px;
+  border: 1px solid #e5e5e5;
+  font-size: 1em;
+}
+
+.s1 input[type="text"]:focus,
+.s1 input[type="email"]:focus,
+.s1 input[type="password"]:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #e9ebee;
+}
+
+.s2 {
+  background-color: #1877f2;
+  color: #fff;
+  font-size: 1.2em;
+  font-weight: bold;
+  border-radius: 5px;
+  border: none;
+  padding: 5px 25px;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.s2:hover {
+  background-color: #166fe5;
+}
+
+.s3 {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.s3 a {
+  color: #1877f2;
+  font-weight: bold;
+  text-decoration: none;
+  margin-left: 5px;
+}
+
+.s4 {
+  background-color: transparent;
+  border: none;
+  font-size: 1em;
+  font-weight: bold;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.s4:focus {
+  outline: none;
+}
+
+.s4 img {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}

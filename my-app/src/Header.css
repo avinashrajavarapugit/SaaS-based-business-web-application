@@ -1,0 +1,178 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding-bottom: 20px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+.header-logo,
+.header-logo1 {
+  height: 40px;
+  margin-right: 1rem;
+}
+
+.header-center-1 {
+  flex: 1;
+  max-width: 500px;
+  margin: 0 2rem;
+}
+
+.header-search-form-1 {
+  display: flex;
+  position: relative;
+}
+
+.header-search-input-1 {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.375rem;
+  outline: none;
+}
+
+.header-search-button {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.header-search-logo-1 {
+  height: 20px;
+  width: 20px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #4a5568;
+  font-weight: 500;
+  padding: 0.5rem;
+  border-radius: 0.375rem;
+  transition: all 0.2s;
+}
+
+.nav-link:hover {
+  color: #2b6cb0;
+  background-color: #ebf8ff;
+}
+
+.nav-link.active {
+  color: #2b6cb0;
+  background-color: #ebf8ff;
+}
+
+.profile-link,
+.signup-link {
+  display: flex;
+  align-items: center;
+  color: #4a5568;
+  transition: color 0.2s;
+}
+
+.profile-link:hover,
+.signup-link:hover {
+  color: #2b6cb0;
+}
+
+.header-profile-logo {
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+}
+
+.join-waitlist {
+  position: relative;
+}
+
+.waitlist-button {
+  padding: 0.5rem 1rem;
+  background-color: #2b6cb0;
+  color: white;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.waitlist-button:hover {
+  background-color: #2c5282;
+}
+
+.waitlist-form {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  margin-top: 0.5rem;
+  background-color: white;
+  padding: 1rem;
+  border-radius: 0.375rem;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  width: 250px;
+}
+
+.waitlist-form h2 {
+  margin-bottom: 1rem;
+  font-size: 1.125rem;
+  font-weight: 500;
+}
+
+.waitlist-form input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.375rem;
+}
+
+.waitlist-form button {
+  width: 100%;
+  padding: 0.5rem;
+  background-color: #2b6cb0;
+  color: white;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+}
+
+.waitlist-form button:hover {
+  background-color: #2c5282;
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 1rem;
+  }
+
+  .header-center-1 {
+    display: none;
+  }
+
+  .header-right {
+    gap: 1rem;
+  }
+
+  .nav-link {
+    padding: 0.25rem;
+  }
+}

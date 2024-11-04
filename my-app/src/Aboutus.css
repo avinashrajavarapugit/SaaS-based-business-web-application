@@ -1,0 +1,46 @@
+.about-us {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px;
+  text-align: center;
+}
+
+.about-us h1 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.about-us p {
+  font-size: 18px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.about-us p:last-child {
+  margin-bottom: 0;
+}
+
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+  

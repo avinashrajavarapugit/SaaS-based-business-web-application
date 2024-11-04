@@ -1,0 +1,67 @@
+.profile-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+  }
+  
+  .navbar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  
+  .nav-item {
+    margin: 0 1rem;
+  }
+  
+  .nav-item button {
+    background-color: transparent;
+    border: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #555;
+    cursor: pointer;
+  }
+  
+  .nav-item button:focus {
+    outline: none;
+  }
+  
+  .nav-item button.active {
+    color: #007bff;
+  }
+  
+  .content {
+    width: 100%;
+    max-width: 800px;
+  }
+  
+  .tab-content {
+    margin-top: 2rem;
+  }
+  
+  @media screen and (min-width: 768px) {
+    .navbar {
+      flex-wrap: nowrap;
+    }
+  
+    .nav-item {
+      margin: 0 2rem;
+    }
+  
+    .content {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+    }
+  
+    .tab-content {
+      flex: 1 1 50%;
+    }
+  }
+  

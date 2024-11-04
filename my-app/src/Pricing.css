@@ -1,0 +1,59 @@
+.pricing-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  .header1{
+    background-color: dodgerblue;
+    font-size:20px;
+    color:white;
+    font-weight:bold;
+    display: flex;
+    flex-direction: row;
+    justify-content:center;
+    padding-bottom: 50px;
+    padding-top: 40px;
+  }
+  .pricing-card {
+    width: 30%;
+    text-align: center;
+    background-color: #f2f2f2;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 0 #ddd;
+    margin-bottom: 2rem;
+  }
+  
+  .pricing-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .pricing-price {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .pricing-features {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .pricing-features li {
+    margin-bottom: 1rem;
+  }
+  
+  .pricing-button {
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    padding: 1rem 2rem;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .pricing-button:hover {
+    background-color: #3e8e41;
+  }
+  

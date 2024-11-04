@@ -1,0 +1,61 @@
+.slider {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-bottom: 20px;
+  }
+  
+  .slider img {
+    display: block;
+    width: 100%;
+  }
+  
+  .slider-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    background-color: #fff;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    color: black;
+    font-size: 28px;
+    text-align: center;
+    line-height: 40px;
+    cursor: pointer;
+  }
+  
+  .slider-arrow:hover {
+    background-color: #ccc;
+    color: #fff;
+  }
+  
+  .slider-arrow-left {
+    left: 20px;
+  }
+  
+  .slider-arrow-right {
+    right: 20px;
+  }
+  
+  .slider-dots {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .slider-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin: 0 5px;
+    background-color: #555;
+    cursor: pointer;
+  }
+  
+  .slider-dot.active {
+    background-color: dodgerblue;
+  }
+  
