@@ -10,6 +10,7 @@ import {
 } from 'fastify-type-provider-zod';
 
 import type { Env } from './config/env.js';
+import prismaPlugin from './plugins/prisma.js';
 import { registerHealthRoutes } from './routes/health.js';
 
 export async function buildApp(env: Env): Promise<FastifyInstance> {
@@ -33,6 +34,7 @@ export async function buildApp(env: Env): Promise<FastifyInstance> {
   await app.register(cookie);
   await app.register(rateLimit, { max: 100, timeWindow: '1 minute' });
 
+  await app.register(prismaPlugin, { env });
   await app.register(registerHealthRoutes);
 
   return app;

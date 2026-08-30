@@ -18,7 +18,10 @@ export default tseslint.config(
   {
     languageOptions: {
       parserOptions: {
-        projectService: true,
+        projectService: {
+          // Tooling scripts that sit outside any tsconfig include path.
+          allowDefaultProject: ['apps/api/prisma/seed.ts'],
+        },
         tsconfigRootDir: import.meta.dirname,
       },
     },

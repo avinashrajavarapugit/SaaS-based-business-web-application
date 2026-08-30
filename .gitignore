@@ -31,6 +31,9 @@ pnpm-debug.log*
 # Prisma generated client
 apps/api/src/generated/
 
+# Private notes — personal interview prep, never published
+docs/private/
+
 # TEMPORARY — remove this entry once the lockfile is regenerated off corporate VPN.
 # The current lockfile resolves all 560 tarballs through an internal Microsoft
 # registry proxy with SHA-1 integrity hashes. Committing it would break CI and
