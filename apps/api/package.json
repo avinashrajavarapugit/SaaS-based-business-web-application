@@ -5,15 +5,16 @@
   "type": "module",
   "scripts": {
     "dev": "tsx watch --env-file=.env src/server.ts",
-    "build": "prisma generate && tsc -p tsconfig.json",
+    "build": "prisma generate && tsc -p tsconfig.build.json",
     "start": "node dist/server.js",
-    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "typecheck": "tsc -p tsconfig.json",
     "test": "vitest run --passWithNoTests",
     "db:migrate": "prisma migrate dev",
     "db:deploy": "prisma migrate deploy",
     "db:generate": "prisma generate",
     "db:reset": "prisma migrate reset --force",
-    "db:studio": "prisma studio"
+    "db:studio": "prisma studio",
+    "verify:tenancy": "tsx scripts/verify-tenant-isolation.ts"
   },
   "dependencies": {
     "@fastify/cookie": "^11.1.2",

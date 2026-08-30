@@ -3,6 +3,7 @@ import { loadEnvFile } from 'node:process';
 import { PrismaPg } from '@prisma/adapter-pg';
 
 import { hashPassword } from '../src/auth/password.js';
+import { withTenant } from '../src/db/tenant.js';
 import { PrismaClient } from '../src/generated/prisma/client.js';
 
 try {
@@ -67,26 +68,28 @@ async function main(): Promise<void> {
     create: { userId: grace.id, organizationId: globex.id, role: 'OWNER' },
   });
 
-  await prisma.document.createMany({
-    data: [
-      {
-        organizationId: acme.id,
-        authorId: ada.id,
-        title: 'Acme Q3 pricing review',
-        body: 'Internal to Acme. Globex must never be able to read this.',
-      },
-      {
-        organizationId: globex.id,
-        authorId: grace.id,
-        title: 'Globex onboarding checklist',
-        body: 'Internal to Globex. Acme must never be able to read this.',
-      },
-    ],
-    skipDuplicates: true,
-  });
+  // Documents are created through withTenant because RLS rejects any insert
+  // whose organizationId does not match the transaction's tenant setting.
+  await seedDocument(acme.id, ada.id, 'Acme Q3 pricing review', 'Internal to Acme.');
+  await seedDocument(globex.id, grace.id, 'Globex onboarding checklist', 'Internal to Globex.');
 
   console.log(`Seeded ${acme.slug} (${ada.email}) and ${globex.slug} (${grace.email})`);
   console.log(`Password for both: ${SEED_PASSWORD}`);
+}
+
+async function seedDocument(
+  organizationId: string,
+  authorId: string,
+  title: string,
+  body: string,
+): Promise<void> {
+  await withTenant(prisma, organizationId, async (db) => {
+    const existing = await db.document.findFirst({ where: { title } });
+
+    if (!existing) {
+      await db.document.create({ data: { organizationId, authorId, title, body } });
+    }
+  });
 }
 
 main()
