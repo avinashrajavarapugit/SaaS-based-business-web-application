@@ -1,0 +1,157 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  OWNER
+  ADMIN
+  MEMBER
+}
+
+enum VerificationPurpose {
+  EMAIL_VERIFICATION
+  PASSWORD_RESET
+}
+
+model User {
+  id              String    @id @default(uuid(7))
+  email           String    @unique
+  emailVerifiedAt DateTime?
+  passwordHash    String
+  name            String
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  memberships        Membership[]
+  refreshTokens      RefreshToken[]
+  verificationTokens VerificationToken[]
+  documents          Document[]          @relation("DocumentAuthor")
+  sentInvites        Invite[]            @relation("InviteInviter")
+}
+
+model Organization {
+  id        String   @id @default(uuid(7))
+  name      String
+  slug      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  memberships Membership[]
+  invites     Invite[]
+  documents   Document[]
+}
+
+model Membership {
+  id             String   @id @default(uuid(7))
+  userId         String
+  organizationId String
+  role           Role     @default(MEMBER)
+  createdAt      DateTime @default(now())
+
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, organizationId])
+  @@index([organizationId])
+}
+
+model Invite {
+  id             String    @id @default(uuid(7))
+  organizationId String
+  email          String
+  role           Role      @default(MEMBER)
+  tokenHash      String    @unique
+  expiresAt      DateTime
+  acceptedAt     DateTime?
+  invitedById    String
+  createdAt      DateTime  @default(now())
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  invitedBy    User         @relation("InviteInviter", fields: [invitedById], references: [id], onDelete: Cascade)
+
+  @@unique([organizationId, email])
+  @@index([organizationId])
+}
+
+/// Opaque refresh tokens, stored only as a SHA-256 hash.
+/// `familyId` groups a rotation chain: replaying any consumed token in the
+/// chain revokes the entire family, which is how reuse is detected.
+model RefreshToken {
+  id        String    @id @default(uuid(7))
+  userId    String
+  familyId  String
+  tokenHash String    @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  revokedAt DateTime?
+  userAgent String?
+  ip        String?
+  createdAt DateTime  @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([familyId])
+  @@index([expiresAt])
+}
+
+/// Single-use, hashed tokens for email verification and password reset.
+model VerificationToken {
+  id        String              @id @default(uuid(7))
+  userId    String
+  purpose   VerificationPurpose
+  tokenHash String              @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime            @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, purpose])
+  @@index([expiresAt])
+}
+
+/// Tenant-scoped content. Every query must be filtered by `organizationId`;
+/// this is enforced by a Prisma Client Extension and by Postgres RLS.
+model Document {
+  id             String   @id @default(uuid(7))
+  organizationId String
+  authorId       String
+  title          String
+  body           String   @default("")
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  author       User         @relation("DocumentAuthor", fields: [authorId], references: [id], onDelete: Cascade)
+
+  @@index([organizationId, updatedAt(sort: Desc)])
+  @@index([authorId])
+}
+
+/// Public marketing-site submissions. Not tenant-scoped by design.
+model ContactSubmission {
+  id        String   @id @default(uuid(7))
+  name      String
+  email     String
+  company   String?
+  message   String
+  createdAt DateTime @default(now())
+
+  @@index([createdAt(sort: Desc)])
+}
+
+model SupportTicket {
+  id        String   @id @default(uuid(7))
+  email     String
+  subject   String
+  message   String
+  createdAt DateTime @default(now())
+
+  @@index([createdAt(sort: Desc)])
+}

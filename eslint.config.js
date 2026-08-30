@@ -40,7 +40,7 @@ export default tseslint.config(
   },
   // Config files live outside any tsconfig, so type-aware rules cannot apply.
   {
-    files: ['**/*.{js,mjs,cjs}', '*.config.ts'],
+    files: ['**/*.{js,mjs,cjs}', '**/*.config.ts'],
     extends: [tseslint.configs.disableTypeChecked],
   },
 );
