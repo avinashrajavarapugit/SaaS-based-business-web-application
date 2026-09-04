@@ -54,8 +54,10 @@ jobs:
             echo "Lockfile unchanged."
             exit 0
           fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # Attributed to the repository owner, not the bot, so the commit counts
+          # towards their contribution graph.
+          git config user.name "Avinash Rajavarapu"
+          git config user.email "179114570+avinashrajavarapugit@users.noreply.github.com"
           git add pnpm-lock.yaml
           git commit -m "chore: generate pnpm-lock.yaml from the public npm registry"
           git push
