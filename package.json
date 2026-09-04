@@ -8,6 +8,7 @@
     "node": ">=24.0.0 <25.0.0"
   },
   "scripts": {
+    "install:mirrored": "sh scripts/install-mirrored.sh",
     "dev": "pnpm --filter @saas/shared build && pnpm --parallel --filter \"./apps/*\" dev",
     "build": "pnpm --filter \"./packages/*\" build && pnpm --filter \"./apps/*\" build",
     "typecheck": "pnpm --filter @saas/shared build && pnpm -r typecheck",
