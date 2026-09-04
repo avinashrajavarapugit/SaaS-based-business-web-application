@@ -2,6 +2,13 @@ packages:
   - "apps/*"
   - "packages/*"
 
+# The lockfile is generated in CI against the public registry, but some
+# development machines install through an internal mirror that lags it by a
+# release or two. Pinning the packages that churn fastest keeps a single
+# lockfile installable in both places.
+overrides:
+  "@types/node": "26.4.0"
+
 # Packages allowed to run install scripts. pnpm blocks all others by default.
 onlyBuiltDependencies:
   - "@prisma/client"
