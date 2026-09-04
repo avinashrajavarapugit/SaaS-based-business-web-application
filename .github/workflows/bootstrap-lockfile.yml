@@ -8,11 +8,16 @@ name: Bootstrap lockfile
 on:
   workflow_dispatch:
   # workflow_dispatch only works from the default branch, so this also runs when
-  # the workflow itself is pushed. The lockfile commit-back does not touch this
-  # path, so it cannot re-trigger the job.
+  # dependencies change. The lockfile commit-back touches none of these paths,
+  # so it cannot re-trigger the job.
   push:
     branches: [feat/v2-platform]
-    paths: ['.github/workflows/bootstrap-lockfile.yml']
+    paths:
+      - '.github/workflows/bootstrap-lockfile.yml'
+      - 'pnpm-workspace.yaml'
+      - 'package.json'
+      - 'apps/*/package.json'
+      - 'packages/*/package.json'
 
 permissions:
   contents: write
