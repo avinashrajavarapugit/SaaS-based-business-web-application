@@ -8,6 +8,7 @@
     "node": ">=24.0.0 <25.0.0"
   },
   "scripts": {
+    "prepare": "husky",
     "install:mirrored": "sh scripts/install-mirrored.sh",
     "dev": "pnpm --filter @saas/shared build && pnpm --parallel --filter \"./apps/*\" dev",
     "build": "pnpm --filter \"./packages/*\" build && pnpm --filter \"./apps/*\" build",
@@ -17,6 +18,15 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check ."
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{js,mjs,json,yml,yaml,css,md}": [
+      "prettier --write"
+    ]
   },
   "devDependencies": {
     "@commitlint/cli": "^21.2.2",
