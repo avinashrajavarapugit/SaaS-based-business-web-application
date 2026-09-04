@@ -33,12 +33,15 @@ jobs:
         with:
           node-version-file: .nvmrc
 
-      - run: pnpm install --lockfile-only
+      - name: Regenerate the lockfile from scratch
+        # Deleted first: pnpm reuses satisfiable entries, so an existing lockfile
+        # generated behind an internal mirror would survive untouched.
+        run: |
+          rm -f pnpm-lock.yaml
+          pnpm install --lockfile-only
 
-      - name: Verify no prerelease versions in direct dependencies
-        # Only our own dependencies are checked. Some transitive packages
-        # legitimately publish prerelease versions as their stable line.
-        run: node scripts/check-direct-dependencies.mjs
+      - name: Verify dependency hygiene
+        run: node scripts/check-dependencies.mjs
 
       - name: Commit lockfile
         run: |
