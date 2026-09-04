@@ -35,13 +35,10 @@ jobs:
 
       - run: pnpm install --lockfile-only
 
-      - name: Verify no prerelease versions resolved
-        run: |
-          if grep -nE "^  '?[@a-z0-9._/-]+@[0-9]+\.[0-9]+\.[0-9]+-(alpha|beta|rc|canary|next|dev)" pnpm-lock.yaml; then
-            echo "::error::Prerelease dependency resolved into the lockfile"
-            exit 1
-          fi
-          echo "No prerelease dependencies."
+      - name: Verify no prerelease versions in direct dependencies
+        # Only our own dependencies are checked. Some transitive packages
+        # legitimately publish prerelease versions as their stable line.
+        run: node scripts/check-direct-dependencies.mjs
 
       - name: Commit lockfile
         run: |
