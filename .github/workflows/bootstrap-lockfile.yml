@@ -1,0 +1,50 @@
+name: Bootstrap lockfile
+
+# The development machine reaches npm through an internal mirror that rewrites
+# tarball URLs and integrity hashes, so a lockfile generated there is not
+# portable. GitHub's runners resolve from the public registry, so the lockfile
+# is generated here instead and committed back.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  lockfile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.ref_name }}
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.34.5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+
+      - run: pnpm install --lockfile-only
+
+      - name: Verify no prerelease versions resolved
+        run: |
+          if grep -nE "^  '?[@a-z0-9._/-]+@[0-9]+\.[0-9]+\.[0-9]+-(alpha|beta|rc|canary|next|dev)" pnpm-lock.yaml; then
+            echo "::error::Prerelease dependency resolved into the lockfile"
+            exit 1
+          fi
+          echo "No prerelease dependencies."
+
+      - name: Commit lockfile
+        run: |
+          if [ -z "$(git status --porcelain pnpm-lock.yaml)" ]; then
+            echo "Lockfile unchanged."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add pnpm-lock.yaml
+          git commit -m "chore: generate pnpm-lock.yaml from the public npm registry"
+          git push
