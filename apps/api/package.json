@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "postinstall": "prisma generate",
     "dev": "tsx watch --env-file=.env src/server.ts",
     "build": "prisma generate && tsc -p tsconfig.build.json",
     "start": "node dist/server.js",
