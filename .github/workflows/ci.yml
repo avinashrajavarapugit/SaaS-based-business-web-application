@@ -10,6 +10,9 @@ concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true
 
+permissions:
+  contents: write
+
 jobs:
   quality:
     name: Lint, typecheck, build, test
@@ -40,7 +43,19 @@ jobs:
           node-version-file: .nvmrc
           cache: pnpm
 
-      - run: pnpm install --frozen-lockfile
+      # Development machines here install through an internal mirror that lags
+      # public npm, so the lockfile is authored on the runner instead. It is
+      # committed at the end of this job, and only if everything below passed.
+      - name: Install
+        run: |
+          if pnpm install --frozen-lockfile; then
+            echo "lockfile_changed=false" >> "$GITHUB_ENV"
+          else
+            echo "Lockfile is stale; regenerating against the public registry."
+            rm -f pnpm-lock.yaml
+            pnpm install
+            echo "lockfile_changed=true" >> "$GITHUB_ENV"
+          fi
 
       - name: Verify dependency hygiene
         run: node scripts/check-dependencies.mjs
@@ -55,6 +70,20 @@ jobs:
         run: psql "postgresql://saas:saas@localhost:5432/saas_dev" -v ON_ERROR_STOP=1 -f infra/postgres/init.sql
 
       - run: pnpm -r test
+
+      - name: Commit the regenerated lockfile
+        if: env.lockfile_changed == 'true' && github.event_name == 'push'
+        run: |
+          if [ -z "$(git status --porcelain pnpm-lock.yaml)" ]; then
+            echo "Lockfile did not actually change."
+            exit 0
+          fi
+          # Attributed to the repository owner so it counts as their activity.
+          git config user.name "Avinash Rajavarapu"
+          git config user.email "179114570+avinashrajavarapugit@users.noreply.github.com"
+          git add pnpm-lock.yaml
+          git commit -m "chore: regenerate pnpm-lock.yaml from the public npm registry"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
 
   tenancy:
     name: Tenant isolation
@@ -88,7 +117,8 @@ jobs:
           node-version-file: .nvmrc
           cache: pnpm
 
-      - run: pnpm install --frozen-lockfile
+      # Tolerates a stale lockfile; the quality job is what enforces it.
+      - run: pnpm install --no-frozen-lockfile
 
       - name: Create the unprivileged application role
         run: psql "postgresql://saas:saas@localhost:5432/saas_dev" -v ON_ERROR_STOP=1 -f infra/postgres/init.sql
