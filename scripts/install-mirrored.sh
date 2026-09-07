@@ -7,6 +7,10 @@
 # so local installs resolve fresh and the portable lockfile is restored
 # afterwards. CI rejects any lockfile carrying internal hosts, so a mirrored
 # resolution can never be merged.
+#
+# To ADD a dependency: edit the package.json by hand and run this. `pnpm add`
+# fails here because it reconciles the whole portable lockfile against the
+# mirror, which does not carry every pinned version.
 set -u
 
 rm -f pnpm-lock.yaml

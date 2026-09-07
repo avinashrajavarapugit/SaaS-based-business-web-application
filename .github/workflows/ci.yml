@@ -14,6 +14,20 @@ jobs:
   quality:
     name: Lint, typecheck, build, test
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: pgvector/pgvector:pg17
+        env:
+          POSTGRES_USER: saas
+          POSTGRES_PASSWORD: saas
+          POSTGRES_DB: saas_dev
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U saas -d saas_dev"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
     steps:
       - uses: actions/checkout@v5
 
@@ -34,6 +48,12 @@ jobs:
       - run: pnpm lint
       - run: pnpm typecheck
       - run: pnpm build
+
+      # The API suite provisions its own saas_test database, so it only needs
+      # the unprivileged role to exist first.
+      - name: Create the unprivileged application role
+        run: psql "postgresql://saas:saas@localhost:5432/saas_dev" -v ON_ERROR_STOP=1 -f infra/postgres/init.sql
+
       - run: pnpm -r test
 
   tenancy:
